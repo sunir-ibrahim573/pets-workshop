@@ -80,4 +80,5 @@ def get_dog(id: int) -> tuple[Response, int] | Response:
 ## HERE
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5100) # Port 5100 to avoid macOS conflicts
+    port = int(os.environ.get('FLASK_PORT', 8000))
+    app.run(debug=True, host='127.0.0.1', port=port)

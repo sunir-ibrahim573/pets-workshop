@@ -17,9 +17,18 @@ if (realNodeModulesPath !== nodeModulesPath) {
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
+  server: {
+    host: '0.0.0.0',
+    port: 5000,
+    allowedHosts: true,
+  },
   vite: {
     plugins: [tailwindcss()],
     server: {
+      host: '0.0.0.0',
+      port: 5000,
+      allowedHosts: true,
+      hmr: false,
       fs: {
         allow: fsAllow,
       },
