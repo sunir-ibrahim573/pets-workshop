@@ -1,4 +1,6 @@
 ---
+import BorderGlow from './BorderGlow.jsx';
+
 interface Dog {
   id: number;
   name: string;
@@ -22,14 +24,19 @@ const { dogs } = Astro.props;
   ) : (
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-testid="dog-list">
       {dogs.map((dog) => (
-        <a
-          href={`/dog/${dog.id}`}
-          class="group block bg-slate-800/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-slate-700/50 hover:border-blue-500/50 hover:shadow-blue-500/10 hover:shadow-xl transition-all duration-300 hover:translate-y-[-6px]"
-          data-testid="dog-card"
-        >
-          <div class="p-6 relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative z-10">
+        <a href={`/dog/${dog.id}`} class="group block" data-testid="dog-card">
+          <BorderGlow
+            client:load
+            edgeSensitivity={30}
+            glowColor="220 90 65"
+            backgroundColor="#0f172a"
+            borderRadius={16}
+            glowRadius={32}
+            glowIntensity={1.0}
+            coneSpread={25}
+            colors={["#3b82f6", "#a855f7", "#22d3ee"]}
+          >
+            <div class="p-6">
               <h3 class="text-xl font-semibold text-slate-100 mb-2 group-hover:text-blue-400 transition-colors" data-testid="dog-name">{dog.name}</h3>
               <p class="text-slate-400 mb-4" data-testid="dog-breed">{dog.breed}</p>
               <div class="mt-4 text-sm text-blue-400 font-medium flex items-center">
@@ -39,7 +46,7 @@ const { dogs } = Astro.props;
                 </svg>
               </div>
             </div>
-          </div>
+          </BorderGlow>
         </a>
       ))}
     </div>
